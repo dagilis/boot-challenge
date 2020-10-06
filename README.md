@@ -4,6 +4,7 @@
 We would like you to model an account service according to REST guidelines. It
 should be able to create, access, find accounts and to be able to transfer money between
 them.
+Covered basic minimal requirements, but there is a long list of improvements which would be great to implement :) 
 
 ## How to launch
 
@@ -16,14 +17,17 @@ following url which will provide JSON formatted entries: http://localhost:8080/a
 
 ### Listing all accounts
 Simplest request listing all items: 
+
 `curl  http://localhost:8080/accounts`
 
 ### Searching accounts by name
 Listing multiple accounts with similar name using `?name=<search>` query: 
+
 `curl  http://localhost:8080/accounts?name=Ma`
 
 ### Creating new Account
 Creating new Account requires to post data to the same endpoint:
+
 `curl --header "Content-Type: application/json" --request POST  --data '{"name":"example","currency":"EUR","balance":10.1,"treasury":false}'  http://localhost:8080/accounts`
 
 Main fields in the entity (as per specification):
@@ -34,6 +38,7 @@ Main fields in the entity (as per specification):
 
 ### Transfer the money
 Money transfer is implemented on transactions endpoint. This if the following example request:
+
 `curl --header "Content-Type: application/json" --request POST  --data '{"fromName":"Vytautas", "toName":"Marie","currency":"EUR","amount":1.0}'  http://localhost:8080/transactions`
 
 Main fields in the entity:
@@ -43,6 +48,7 @@ Main fields in the entity:
 - amount - amount to be transfered (in the crrency specified above)
 
 ### Running Unit Tests:
+
 `$ mvn test`
 
 ## Future Improvements
