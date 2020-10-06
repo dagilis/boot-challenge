@@ -1,6 +1,7 @@
 package lt.dagaz.boot.challenge.accounts;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -8,10 +9,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import java.util.List;
 
 import static java.util.Collections.singletonList;
+import static lt.dagaz.boot.challenge.accounts.AccountServiceTestConfig.SAMPLE_ACCOUNT;
 import static lt.dagaz.boot.challenge.accounts.AccountServiceTestConfig.SAMPLE_DTO;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class AccountServiceTest {
@@ -26,7 +30,7 @@ class AccountServiceTest {
     public void getAccountsOnEmptyDbShouldBeEmpty() {
         List<Account> accounts = accountService.getAccounts();
 
-        assertTrue(accounts.isEmpty());
+        assertThat(accounts, is(empty()));
     }
 
     @Test
@@ -43,4 +47,14 @@ class AccountServiceTest {
         assertEquals(accounts.get(0).isTreasury(), SAMPLE_DTO.isTreasury(), "Value should match initial one");
     }
 
+    @Test
+    public void callingServiceEntityIsStoredIntoDB() {
+        ArgumentCaptor<AccountDAO> argumentCaptor = ArgumentCaptor.forClass(AccountDAO.class);
+        when(accountRepository.save(argumentCaptor.capture())).thenReturn(SAMPLE_DTO);
+
+        accountService.save(SAMPLE_ACCOUNT);
+
+        AccountDAO value = argumentCaptor.getValue();
+        assertThat(value.getName(), equalTo(SAMPLE_ACCOUNT.getName()));
+    }
 }

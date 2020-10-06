@@ -23,4 +23,8 @@ public class AccountService {
                 .map(accountDAO -> modelMapper.map(accountDAO, Account.class))
                 .collect(toList());
     }
+
+    public void save(Account account) {
+        accountRepository.save(modelMapper.map(account, AccountDAO.class));
+    }
 }
