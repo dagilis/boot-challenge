@@ -29,7 +29,7 @@ class AccountServiceTestConfig {
 
     static AccountDAO createSampleEntity() {
         AccountDAO dao = new AccountDAO();
-        dao.setName("Sample");
+        dao.setName("example");
         dao.setCurrency(Currency.getInstance("EUR"));
         dao.setBalance(TEN);
         dao.setTreasury(false);

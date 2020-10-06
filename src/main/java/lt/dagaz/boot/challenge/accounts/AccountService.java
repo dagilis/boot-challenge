@@ -20,13 +20,20 @@ public class AccountService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public List<Account> getAccounts() {
-        return StreamSupport.stream(accountRepository.findAll().spliterator(), false)
-                .map(accountDAO -> modelMapper.map(accountDAO, Account.class))
-                .collect(toList());
-    }
-
     public void save(Account account) {
         accountRepository.save(modelMapper.map(account, AccountDAO.class));
+    }
+
+    public List<Account> getByName(String name) {
+        if (name != null) {
+            return mapToDTO(accountRepository.findByName(name));
+        }
+        return mapToDTO(accountRepository.findAll());
+    }
+
+    private List<Account> mapToDTO(Iterable<AccountDAO> findResults) {
+        return StreamSupport.stream(findResults.spliterator(), false)
+                .map(accountDAO -> modelMapper.map(accountDAO, Account.class))
+                .collect(toList());
     }
 }

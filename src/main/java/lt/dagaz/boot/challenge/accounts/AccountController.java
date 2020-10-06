@@ -2,10 +2,7 @@ package lt.dagaz.boot.challenge.accounts;
 
 import lt.dagaz.boot.challenge.accounts.model.Account;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -17,8 +14,8 @@ public class AccountController {
     private AccountService accountService;
 
     @GetMapping("/accounts")
-    public List<Account> getAccounts() {
-        return accountService.getAccounts();
+    public List<Account> getAccounts(@RequestParam(required = false) String name) {
+        return accountService.getByName(name);
     }
 
     @PostMapping("/accounts")

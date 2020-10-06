@@ -11,6 +11,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.Collections;
 
 import static lt.dagaz.boot.challenge.accounts.AccountServiceTestConfig.SAMPLE_ACCOUNT;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -45,10 +46,21 @@ class AccountControllerTest {
 
     @Test
     public void getAccountsResponseWillContainJson() throws Exception {
-        given(accountService.getAccounts())
+        given(accountService.getByName(null))
                 .willReturn(Collections.singletonList(SAMPLE_ACCOUNT));
 
         mvc.perform(MockMvcRequestBuilders.get("/accounts")
+                .accept(APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json("[" + EXAMPLE_JSON_STRING_PAYOLOAD + "]"));
+    }
+
+    @Test
+    public void getAccountAllowsFiltering() throws Exception {
+        given(accountService.getByName(anyString()))
+                .willReturn(Collections.singletonList(SAMPLE_ACCOUNT));
+
+        mvc.perform(MockMvcRequestBuilders.get("/accounts?name=example")
                 .accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().json("[" + EXAMPLE_JSON_STRING_PAYOLOAD + "]"));
