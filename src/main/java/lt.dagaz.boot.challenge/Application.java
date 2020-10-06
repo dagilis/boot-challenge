@@ -1,7 +1,7 @@
 package lt.dagaz.boot.challenge;
 
-import lt.dagaz.boot.challenge.accounts.model.AccountDAO;
 import lt.dagaz.boot.challenge.accounts.AccountRepository;
+import lt.dagaz.boot.challenge.accounts.model.AccountDAO;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

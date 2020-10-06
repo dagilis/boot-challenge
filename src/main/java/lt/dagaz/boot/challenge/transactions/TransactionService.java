@@ -4,9 +4,11 @@ import lt.dagaz.boot.challenge.accounts.AccountRepository;
 import lt.dagaz.boot.challenge.accounts.model.AccountDAO;
 import lt.dagaz.boot.challenge.transactions.model.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 
+@Component
 public class TransactionService {
 
     @Autowired

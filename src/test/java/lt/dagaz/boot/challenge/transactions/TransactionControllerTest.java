@@ -41,7 +41,7 @@ class TransactionControllerTest {
     }
 
     @Test
-    public void trasferBetweenDifferentCurrenciesFails() throws Exception {
+    public void transferBetweenDifferentCurrenciesFails() throws Exception {
         mvc.perform(MockMvcRequestBuilders.post("/transactions")
                 .contentType(APPLICATION_JSON)
                 .content(mapToJson(new Transaction("Vytautas", "Mark", EUR, ONE)))
