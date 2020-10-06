@@ -20,6 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class AccountControllerTest {
 
+    public static final String EXAMPLE_JSON_STRING_PAYOLOAD = "{\"name\":\"example\",\"currency\":\"EUR\",\"balance\":10.1,\"treasury\":false}";
     @Autowired
     private MockMvc mvc;
 
@@ -50,6 +51,14 @@ class AccountControllerTest {
         mvc.perform(MockMvcRequestBuilders.get("/accounts")
                 .accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().json("[{\"name\":\"example\",\"currency\":\"EUR\",\"balance\":10.1,\"treasury\":false}]"));
+                .andExpect(content().json("[" + EXAMPLE_JSON_STRING_PAYOLOAD + "]"));
+    }
+
+    @Test
+    public void postToTheEndpointWillSaveNewValidAccount() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/accounts")
+                .content(EXAMPLE_JSON_STRING_PAYOLOAD)
+                .contentType(APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 }
