@@ -5,5 +5,8 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface AccountRepository extends CrudRepository<AccountDAO, String> {
 
-    Iterable<AccountDAO> findByName(String name);
+    Iterable<AccountDAO> findByNameContains(String name);
+
+    AccountDAO findByName(String name);
+
 }

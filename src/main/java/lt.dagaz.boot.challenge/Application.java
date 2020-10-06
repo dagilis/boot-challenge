@@ -29,7 +29,7 @@ public class Application {
             log.info("Inserting initial data for easy testing.");
             accountRepository.save(new AccountDAO("Vytautas", Currency.getInstance("EUR"), BigDecimal.valueOf(2.3), false));
             accountRepository.save(new AccountDAO("Marie", Currency.getInstance("EUR"), BigDecimal.TEN, true));
-            accountRepository.save(new AccountDAO("Joe", Currency.getInstance("USD"), BigDecimal.TEN, false));
+            accountRepository.save(new AccountDAO("Mark", Currency.getInstance("USD"), BigDecimal.TEN, false));
             accountRepository.findAll().forEach(accountDAO -> log.info("sample:" + accountDAO.toString()));
         };
     }

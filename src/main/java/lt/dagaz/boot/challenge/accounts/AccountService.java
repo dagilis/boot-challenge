@@ -26,7 +26,7 @@ public class AccountService {
 
     public List<Account> getByName(String name) {
         if (name != null) {
-            return mapToDTO(accountRepository.findByName(name));
+            return mapToDTO(accountRepository.findByNameContains(name));
         }
         return mapToDTO(accountRepository.findAll());
     }

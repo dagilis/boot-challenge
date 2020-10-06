@@ -17,7 +17,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 
@@ -53,7 +52,7 @@ class AccountServiceTest {
 
     @Test
     public void findByNameMapsCorrectly() {
-        given(accountRepository.findByName(anyString()))
+        given(accountRepository.findByNameContains(anyString()))
                 .willReturn(singletonList(SAMPLE_DTO));
 
         List<Account> accounts = accountService.getByName("example");
