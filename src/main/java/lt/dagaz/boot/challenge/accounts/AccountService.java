@@ -22,6 +22,5 @@ public class AccountService {
         return StreamSupport.stream(accountRepository.findAll().spliterator(), false)
                 .map(accountDAO -> modelMapper.map(accountDAO, Account.class))
                 .collect(toList());
-
     }
 }
