@@ -1,10 +1,13 @@
 package lt.dagaz.boot.challenge.transactions.model;
 
+import lt.dagaz.boot.challenge.transactions.validation.ViableTransaction;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Currency;
 
+@ViableTransaction
 public class Transaction {
     @NotBlank
     private String fromName;

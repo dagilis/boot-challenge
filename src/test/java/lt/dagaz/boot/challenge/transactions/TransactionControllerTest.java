@@ -35,9 +35,18 @@ class TransactionControllerTest {
     public void getAccountsEndpointRespondWithHTTPOK() throws Exception {
         mvc.perform(MockMvcRequestBuilders.post("/transactions")
                 .contentType(APPLICATION_JSON)
-                .content(mapToJson(new Transaction("Vytautas", "Marc", EUR, ONE)))
+                .content(mapToJson(new Transaction("Vytautas", "Marie", EUR, ONE)))
                 .accept(APPLICATION_JSON))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void trasferBetweenDifferentCurrenciesFails() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/transactions")
+                .contentType(APPLICATION_JSON)
+                .content(mapToJson(new Transaction("Vytautas", "Mark", EUR, ONE)))
+                .accept(APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
     }
 
     @Test

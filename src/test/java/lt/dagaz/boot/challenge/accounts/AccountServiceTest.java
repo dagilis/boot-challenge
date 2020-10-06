@@ -2,6 +2,7 @@ package lt.dagaz.boot.challenge.accounts;
 
 import lt.dagaz.boot.challenge.accounts.model.Account;
 import lt.dagaz.boot.challenge.accounts.model.AccountDAO;
+import lt.dagaz.boot.challenge.transactions.TransactionService;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,8 @@ class AccountServiceTest {
     @Autowired
     private AccountService accountService;
 
+    @MockBean
+    private TransactionService transactionService;
     @Test
     public void getAccountsOnEmptyDbShouldBeEmpty() {
         List<Account> accounts = accountService.getByName(null);

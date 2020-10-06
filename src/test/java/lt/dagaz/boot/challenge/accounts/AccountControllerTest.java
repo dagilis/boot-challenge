@@ -1,5 +1,6 @@
 package lt.dagaz.boot.challenge.accounts;
 
+import lt.dagaz.boot.challenge.transactions.TransactionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -28,6 +29,8 @@ class AccountControllerTest {
     @MockBean
     private AccountService accountService;
 
+    @MockBean
+    private TransactionService transactionService;
 
     @Test
     public void getAccountsEndpointRespondWithHTTPOK() throws Exception {
