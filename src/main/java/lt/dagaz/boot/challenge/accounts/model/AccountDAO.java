@@ -1,4 +1,4 @@
-package lt.dagaz.boot.challenge.accounts;
+package lt.dagaz.boot.challenge.accounts.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

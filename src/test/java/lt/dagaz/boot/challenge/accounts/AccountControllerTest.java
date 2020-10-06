@@ -61,4 +61,60 @@ class AccountControllerTest {
                 .contentType(APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    public void postWithMissingNameShouldRerunError() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/accounts")
+                .content("{\"currency\":\"EUR\",\"balance\":10.1,\"treasury\":false}")
+                .contentType(APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void nonTreasuryAccountWithNegativeBalanceShouldFail() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/accounts")
+                .content("{\"name\":\"treasury\",\"currency\":\"EUR\",\"balance\":-10.1,\"treasury\":false}")
+                .contentType(APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void treasuryAccountWithNegativeBalanceShouldBeCreated() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/accounts")
+                .content("{\"name\":\"treasury\",\"currency\":\"EUR\",\"balance\":-10.1,\"treasury\":true}")
+                .contentType(APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void postWithBlankNameShouldRerunError() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/accounts")
+                .content("{\"name\":\"\",\"currency\":\"EUR\",\"balance\":10.1,\"treasury\":false}")
+                .contentType(APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void postWithMissingCurrencyShouldRerunError() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/accounts")
+                .content("{\"name\":\"example\",\"balance\":10.1,\"treasury\":false}")
+                .contentType(APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void postWithMissingBalanceShouldRerunError() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/accounts")
+                .content("{\"name\":\"example\",\"currency\":\"EUR\",\"treasury\":false}")
+                .contentType(APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void postWithMissingTreasuryShouldRerunError() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/accounts")
+                .content("{\"name\":\"example\",\"currency\":\"EUR\",\"balance\":10.1}")
+                .contentType(APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
 }

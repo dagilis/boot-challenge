@@ -1,5 +1,7 @@
 package lt.dagaz.boot.challenge.accounts;
 
+import lt.dagaz.boot.challenge.accounts.model.Account;
+import lt.dagaz.boot.challenge.accounts.model.AccountDAO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

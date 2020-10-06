@@ -1,13 +1,26 @@
-package lt.dagaz.boot.challenge.accounts;
+package lt.dagaz.boot.challenge.accounts.model;
 
+import lt.dagaz.boot.challenge.accounts.validation.TreasuryAccount;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Currency;
 
+@TreasuryAccount
 public class Account {
+
+    @NotBlank
     private String name;
+
+    @NotNull
     private Currency currency;
+
+    @NotNull
     private BigDecimal balance;
-    private boolean treasury;
+
+    @NotNull
+    private Boolean treasury;
 
     public Account() {
     }
@@ -43,7 +56,7 @@ public class Account {
         this.balance = balance;
     }
 
-    public boolean isTreasury() {
+    public Boolean isTreasury() {
         return treasury;
     }
 

@@ -1,5 +1,7 @@
 package lt.dagaz.boot.challenge.accounts;
 
+import lt.dagaz.boot.challenge.accounts.model.Account;
+import lt.dagaz.boot.challenge.accounts.model.AccountDAO;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
